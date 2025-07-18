@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>S24 – Local Service Givers (Dhaka City)</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      color: #222;
+    }
+
+    header {
+      background: #004aad;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      padding: 1rem 2rem;
+    }
+
+    h2 {
+      color: #004aad;
+    }
+
+    .filters {
+      margin-bottom: 1rem;
+    }
+
+    .filters select {
+      padding: 0.5rem;
+      margin-right: 0.5rem;
+    }
+
+    .profile-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .profile-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-card h3 {
+      margin-top: 0;
+    }
+
+    .profile-card a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer {
+      background: #e0e0e0;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>S24 – Local Service Givers</h1>
+    <p>Verified services in Dhaka City</p>
+  </header>
+
+  <div class="container">
+    <h2>Find a Service</h2>
+    <div class="filters">
+      <select id="categoryFilter">
+        <option value="all">All Categories</option>
+        <option value="Electrician">Electrician</option>
+        <option value="Plumber">Plumber</option>
+        <option value="AC">AC Servicing</option>
+      </select>
+
+      <select id="areaFilter">
+        <option value="all">All Areas</option>
+        <option value="Mirpur">Mirpur</option>
+        <option value="Dhanmondi">Dhanmondi</option>
+        <option value="Gulshan">Gulshan</option>
+      </select>
+
+      <button onclick="filterProfiles()">Filter</button>
+    </div>
+
+    <div id="profileList" class="profile-list"></div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 S24 – Dhaka City</p>
+  </footer>
+
+  <script>
+    const profiles = [
+      {
+        name: "Rahim Uddin",
+        category: "Electrician",
+        area: "Mirpur",
+        phone: "880123456789",
+        whatsapp: "880123456789"
+      },
+      {
+        name: "Sharif Hossain",
+        category: "AC",
+        area: "Dhanmondi",
+        phone: "8801987654321",
+        whatsapp: "8801987654321"
+      },
+      {
+        name: "Sumon Mia",
+        category: "Plumber",
+        area: "Gulshan",
+        phone: "8801723456789",
+        whatsapp: "8801723456789"
+      },
+      {
+        name: "Hasan Kabir",
+        category: "Electrician",
+        area: "Mirpur",
+        phone: "8801888123456",
+        whatsapp: "8801888123456"
+      }
+    ];
+
+    function renderProfiles(data) {
+      const container = document.getElementById("profileList");
+      container.innerHTML = "";
+      if (data.length === 0) {
+        container.innerHTML = "<p>No profiles found.</p>";
+        return;
+      }
+      data.forEach(profile => {
+        container.innerHTML += `
+          <div class="profile-card">
+            <h3>${profile.name}</h3>
+            <p>Category: ${profile.category}</p>
+            <p>Area: ${profile.area}</p>
+            <p>Verified ✅</p>
+            <a href="tel:+${profile.phone}">📞 Call</a> |
+            <a href="https://wa.me/${profile.whatsapp}" target="_blank">💬 WhatsApp</a>
+          </div>
+        `;
+      });
+    }
+
+    function filterProfiles() {
+      const category = document.getElementById("categoryFilter").value;
+      const area = document.getElementById("areaFilter").value;
+
+      const filtered = profiles.filter(p => {
+        return (category === "all" || p.category === category) &&
+               (area === "all" || p.area === area);
+      });
+
+      renderProfiles(filtered);
+    }
+
+    // Initial load
+    renderProfiles(profiles);
+  </script>
+</body>
+</html>
