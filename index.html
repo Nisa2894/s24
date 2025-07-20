@@ -1,44 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Service 24 - Local Service Providers in Dhaka</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <script>
-    // Dynamic Data for dropdown menus
-    document.addEventListener('DOMContentLoaded', function() {
-      const services = ["AC Servicing", "Plumber", "Electrician", "Home Maid", "Cleaner", "Gardener", "Mason", "Home Shifting"];
-      const areas = ["Banani", "Gulshan", "Dhanmondi", "Mirpur", "Uttara", "Badda", "Mohammadpur", "Tejgaon"];
-
-      const servicesMenu = document.getElementById('services-list');
-      const areasMenu = document.getElementById('areas-list');
-
-      services.forEach(service => {
-        const li = document.createElement('li');
-        li.textContent = service;
-        servicesMenu.appendChild(li);
-      });
-
-      areas.forEach(area => {
-        const li = document.createElement('li');
-        li.textContent = area;
-        areasMenu.appendChild(li);
-      });
-    });
-  </script>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <!-- Header -->
   <header class="header">
     <div class="logo">Service 24</div>
-    <input type="text" class="search-bar" placeholder="Search services or areas...">
+    <form class="search-form" action="search.html" method="GET">
+      <input type="text" name="q" placeholder="Search services or areas..." />
+    </form>
     <nav class="nav">
       <ul>
         <li><a href="index.html">Home</a></li>
         <li class="dropdown">
           <a href="#">All Services ▾</a>
-          <ul class="dropdown-menu" id="services-list"></ul>
+          <ul class="dropdown-menu">
+            <li><a href="ac-servicing.html">AC Servicing</a></li>
+            <li><a href="plumber.html">Plumber</a></li>
+            <li><a href="electrician.html">Electrician</a></li>
+            <li><a href="home-maid.html">Home Maid</a></li>
+            <li><a href="cleaner.html">Cleaner</a></li>
+            <li><a href="gardener.html">Gardener</a></li>
+            <li><a href="mason.html">Mason</a></li>
+            <li><a href="home-shifting.html">Home Shifting</a></li>
+          </ul>
         </li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="contact.html">Contact Us</a></li>
@@ -48,81 +38,131 @@
 
   <!-- Slider -->
   <section class="slider">
-    <div class="slide">Fast & Trusted Local Services</div>
-    <div class="slide">Verified Service Providers</div>
-    <div class="slide">Affordable & Professional</div>
+    <img src="https://via.placeholder.com/1200x300?text=Fast+%26+Trusted+Local+Services" alt="Slide 1">
+    <img src="https://via.placeholder.com/1200x300?text=Verified+%26+Skilled+Professionals" alt="Slide 2">
+    <img src="https://via.placeholder.com/1200x300?text=Affordable+%26+On-Time+Help" alt="Slide 3">
   </section>
 
-  <!-- Dynamic Dropdown Menus -->
+  <!-- Dropdown Filters -->
   <section class="dropdown-section">
     <div class="dropdown-box">
       <h3>Browse by Services</h3>
-      <ul id="services-list"></ul>
+      <ul>
+        <li><a href="ac-servicing.html">AC Servicing</a></li>
+        <li><a href="plumber.html">Plumber</a></li>
+        <li><a href="electrician.html">Electrician</a></li>
+        <li><a href="home-maid.html">Home Maid</a></li>
+        <li><a href="cleaner.html">Cleaner</a></li>
+        <li><a href="gardener.html">Gardener</a></li>
+        <li><a href="mason.html">Mason</a></li>
+        <li><a href="home-shifting.html">Home Shifting</a></li>
+      </ul>
     </div>
     <div class="dropdown-box">
       <h3>Browse by Area</h3>
-      <ul id="areas-list"></ul>
+      <ul>
+        <li><a href="area-banani.html">Banani</a></li>
+        <li><a href="area-gulshan.html">Gulshan</a></li>
+        <li><a href="area-dhanmondi.html">Dhanmondi</a></li>
+        <li><a href="area-mirpur.html">Mirpur</a></li>
+        <li><a href="area-uttara.html">Uttara</a></li>
+        <li><a href="area-badda.html">Badda</a></li>
+        <li><a href="area-mohammadpur.html">Mohammadpur</a></li>
+        <li><a href="area-tejgaon.html">Tejgaon</a></li>
+      </ul>
     </div>
   </section>
 
   <!-- Service Providers -->
   <main class="main">
-    <h2>Our Top Service Providers</h2>
+    <h2>Top Verified Service Providers</h2>
     <div class="provider-grid">
-      <div class="card">
-        <h3>Rahim Electric</h3>
-        <p>Area: Dhanmondi</p>
-        <p>Status: ✅ Verified</p>
-        <a href="tel:01712345678">📞 Call</a> | <a href="https://wa.me/8801712345678" target="_blank">💬 WhatsApp</a>
-      </div>
-      <div class="card">
-        <h3>Sumon Plumber</h3>
-        <p>Area: Mirpur</p>
-        <p>Status: ✅ Verified</p>
-        <a href="tel:01723456789">📞 Call</a> | <a href="https://wa.me/8801723456789" target="_blank">💬 WhatsApp</a>
-      </div>
-      <div class="card">
-        <h3>CleanPro</h3>
+      <!-- Provider Card -->
+      <div class="provider-card">
+        <img src="https://via.placeholder.com/150" alt="Provider 1">
+        <h4>Rahim Electric</h4>
         <p>Area: Banani</p>
-        <p>Status: ❌ Not Verified</p>
-        <a href="tel:01734567890">📞 Call</a> | <a href="https://wa.me/8801734567890" target="_blank">💬 WhatsApp</a>
+        <p>Expertise: Electrician</p>
+        <p>Status: ✅ Verified</p>
+        <a href="tel:01711111111">📞 Call</a> |
+        <a href="https://wa.me/8801711111111" target="_blank">💬 WhatsApp</a>
       </div>
-      <div class="card">
-        <h3>Jannat Maid Service</h3>
+
+      <div class="provider-card">
+        <img src="https://via.placeholder.com/150" alt="Provider 2">
+        <h4>Jamal Plumber</h4>
         <p>Area: Gulshan</p>
-        <p>Status: ✅ Verified</p>
-        <a href="tel:01745678901">📞 Call</a> | <a href="https://wa.me/8801745678901" target="_blank">💬 WhatsApp</a>
+        <p>Expertise: Plumbing</p>
+        <p>Status: ❌ Not Verified</p>
+        <a href="tel:01722222222">📞 Call</a> |
+        <a href="https://wa.me/8801722222222" target="_blank">💬 WhatsApp</a>
       </div>
-      <div class="card">
-        <h3>Green Garden</h3>
+
+      <div class="provider-card">
+        <img src="https://via.placeholder.com/150" alt="Provider 3">
+        <h4>Fatema Maid Service</h4>
+        <p>Area: Dhanmondi</p>
+        <p>Expertise: Home Maid</p>
+        <p>Status: ✅ Verified</p>
+        <a href="tel:01733333333">📞 Call</a> |
+        <a href="https://wa.me/8801733333333" target="_blank">💬 WhatsApp</a>
+      </div>
+
+      <div class="provider-card">
+        <img src="https://via.placeholder.com/150" alt="Provider 4">
+        <h4>Akash AC Care</h4>
+        <p>Area: Mirpur</p>
+        <p>Expertise: AC Servicing</p>
+        <p>Status: ✅ Verified</p>
+        <a href="tel:01744444444">📞 Call</a> |
+        <a href="https://wa.me/8801744444444" target="_blank">💬 WhatsApp</a>
+      </div>
+
+      <div class="provider-card">
+        <img src="https://via.placeholder.com/150" alt="Provider 5">
+        <h4>Garden King</h4>
         <p>Area: Uttara</p>
+        <p>Expertise: Gardener</p>
         <p>Status: ❌ Not Verified</p>
-        <a href="tel:01756789012">📞 Call</a> | <a href="https://wa.me/8801756789012" target="_blank">💬 WhatsApp</a>
+        <a href="tel:01755555555">📞 Call</a> |
+        <a href="https://wa.me/8801755555555" target="_blank">💬 WhatsApp</a>
       </div>
-      <div class="card">
-        <h3>Shanto AC Repair</h3>
-        <p>Area: Badda</p>
-        <p>Status: ✅ Verified</p>
-        <a href="tel:01767890123">📞 Call</a> | <a href="https://wa.me/8801767890123" target="_blank">💬 WhatsApp</a>
-      </div>
-      <div class="card">
-        <h3>MoveEasy Shifting</h3>
-        <p>Area: Mohammadpur</p>
-        <p>Status: ❌ Not Verified</p>
-        <a href="tel:01778901234">📞 Call</a> | <a href="https://wa.me/8801778901234" target="_blank">💬 WhatsApp</a>
-      </div>
-      <div class="card">
-        <h3>BuildStrong Mason</h3>
+
+      <div class="provider-card">
+        <img src="https://via.placeholder.com/150" alt="Provider 6">
+        <h4>CleanPro</h4>
         <p>Area: Tejgaon</p>
+        <p>Expertise: Cleaner</p>
         <p>Status: ✅ Verified</p>
-        <a href="tel:01789012345">📞 Call</a> | <a href="https://wa.me/8801789012345" target="_blank">💬 WhatsApp</a>
+        <a href="tel:01766666666">📞 Call</a> |
+        <a href="https://wa.me/8801766666666" target="_blank">💬 WhatsApp</a>
+      </div>
+
+      <div class="provider-card">
+        <img src="https://via.placeholder.com/150" alt="Provider 7">
+        <h4>Hossain Masonry</h4>
+        <p>Area: Badda</p>
+        <p>Expertise: Mason</p>
+        <p>Status: ✅ Verified</p>
+        <a href="tel:01777777777">📞 Call</a> |
+        <a href="https://wa.me/8801777777777" target="_blank">💬 WhatsApp</a>
+      </div>
+
+      <div class="provider-card">
+        <img src="https://via.placeholder.com/150" alt="Provider 8">
+        <h4>ShiftEase</h4>
+        <p>Area: Mohammadpur</p>
+        <p>Expertise: Home Shifting</p>
+        <p>Status: ✅ Verified</p>
+        <a href="tel:01788888888">📞 Call</a> |
+        <a href="https://wa.me/8801788888888" target="_blank">💬 WhatsApp</a>
       </div>
     </div>
   </main>
 
   <!-- Footer -->
   <footer class="footer">
-    <p>Office: Road 12, Dhanmondi, Dhaka | Phone: 01700000000</p>
+    <p>📍 Office: Road 12, Dhanmondi, Dhaka | ☎️ 01700000000</p>
     <p>&copy; 2025 Service 24. All Rights Reserved.</p>
   </footer>
 
