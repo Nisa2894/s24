@@ -5,247 +5,150 @@
     box-sizing: border-box;
 }
 
-/* Body Styling */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f3f4f6;
-    color: #333;
-    line-height: 1.6;
-}
-
-/* Header Styling */
+/* Header Styles */
 header {
-    background: linear-gradient(90deg, #2563eb, #1e40af);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
+/* Logo */
 header img {
-    height: 48px;
-    object-fit: contain;
+    transition: transform 0.3s ease;
 }
 
-header input {
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    border: none;
-    width: 200px;
-    font-size: 1rem;
-    transition: width 0.3s ease;
+header img:hover {
+    transform: scale(1.1);
 }
 
-header input:focus {
-    outline: none;
-    width: 250px;
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.5);
-}
-
-nav {
-    display: flex;
-    gap: 1.5rem;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
+/* Navigation */
+nav ul li a {
     transition: color 0.3s ease;
 }
 
-nav a:hover {
-    color: #dbeafe;
+nav ul li a:hover {
+    color: #ffd700;
 }
 
 /* Dropdown Menu */
-.dropdown {
-    position: relative;
-}
-
 .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: white;
-    border-radius: 0.375rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     min-width: 200px;
-    z-index: 1000;
+    z-index: 20;
+    border: 1px solid #e5e7eb;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-10px);
+    opacity: 0;
 }
 
 .dropdown:hover .dropdown-menu {
     display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .dropdown-menu a {
-    color: #1f2937;
-    padding: 0.5rem 1rem;
-    display: block;
-    text-decoration: none;
+    transition: background-color 0.2s ease;
 }
 
-.dropdown-menu a:hover {
-    background-color: #f3f4f6;
-    color: #2563eb;
-}
-
-/* Slider Styling */
+/* Slider */
 .slider {
+    max-height: 400px;
+}
+
+.slide img {
+    object-fit: cover;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease-in-out;
 }
 
-/* Main Content */
-main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
+.slide {
+    transition: opacity 1s ease-in-out;
 }
 
-.container {
-    padding: 0 1rem;
+/* Tagline Section */
+section.bg-white .flex div {
+    transition: transform 0.3s ease;
 }
 
-/* Dropdown Filters */
-select {
-    appearance: none;
-    background: white url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat;
-    background-position: right 0.5rem center;
-    background-size: 1.5rem;
-    padding: 0.5rem 2rem 0.5rem 1rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.375rem;
-    font-size: 1rem;
-    width: 100%;
-    max-width: 300px;
-    cursor: pointer;
+section.bg-white .flex div:hover {
+    transform: translateY(-5px);
 }
 
-select:focus {
-    outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
-}
-
-/* Service Provider Cards */
-.grid > div {
-    background: white;
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Service Providers */
+#providerList .bg-white {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.grid > div:hover {
+#providerList .bg-white:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.grid h3 {
-    font-size: 1.25rem;
-    color: #1f2937;
-    margin-bottom: 0.5rem;
+#providerList a {
+    transition: color 0.3s ease;
 }
 
-.grid p {
-    color: #4b5563;
-    margin-bottom: 0.5rem;
-}
-
-.grid .bg-blue-500, .grid .bg-green-500 {
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-}
-
-.grid .bg-blue-500:hover {
-    background-color: #1d4ed8;
-}
-
-.grid .bg-green-500:hover {
-    background-color: #15803d;
+#providerList a:hover {
+    color: #1e40af;
 }
 
 /* Client Reviews */
-.grid + h2 {
-    font-size: 1.5rem;
-    color: #1f2937;
-    margin-bottom: 1rem;
+section.container .grid .bg-white {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.grid > div h3 {
-    font-size: 1.125rem;
-    color: #1f2937;
+section.container .grid .bg-white:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.grid > div p {
-    color: #4b5563;
-}
-
-/* Footer Styling */
+/* Footer */
 footer {
-    background: #1f2937;
-    color: white;
-    padding: 2rem 1rem;
-    text-align: center;
-}
-
-footer p {
-    margin-bottom: 0.5rem;
-    font-size: 0.875rem;
+    border-top: 2px solid #1e40af;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     header .container {
         flex-direction: column;
-        gap: 1rem;
+        align-items: flex-start;
     }
 
-    header input {
-        width: 100%;
-        max-width: 300px;
-    }
-
-    nav {
+    header .flex {
         flex-direction: column;
-        gap: 0.5rem;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    nav ul li {
+        margin: 10px 0;
     }
 
     .dropdown-menu {
         position: static;
         width: 100%;
+        transform: none;
     }
 
-    .relative.w-full.h-96 {
+    .slider {
         height: 200px;
     }
 
-    select {
-        max-width: 100%;
-        margin-bottom: 1rem;
+    #providerList {
+        grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 640px) {
-    .grid {
-        grid-template-columns: 1fr !important;
+    section.bg-white .flex {
+        flex-direction: column;
+        space-x-0;
+    }
+
+    section.bg-white .flex div {
+        margin-bottom: 1rem;
     }
 }
