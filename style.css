@@ -5,9 +5,9 @@
     box-sizing: border-box;
 }
 
-/* Header Styles */
+/* Header */
 header {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 /* Logo */
@@ -20,26 +20,25 @@ header img:hover {
 }
 
 /* Navigation */
-nav ul li a {
+nav ul li a, nav ul li button {
     transition: color 0.3s ease;
 }
 
-nav ul li a:hover {
+nav ul li a:hover, nav ul li button:hover {
     color: #ffd700;
 }
 
 /* Dropdown Menu */
 .dropdown-menu {
     min-width: 200px;
-    z-index: 20;
+    z-index: 30;
     border: 1px solid #e5e7eb;
     transition: opacity 0.3s ease, transform 0.3s ease;
     transform: translateY(-10px);
     opacity: 0;
 }
 
-.dropdown:hover .dropdown-menu {
-    display: block;
+.dropdown-menu.block {
     opacity: 1;
     transform: translateY(0);
 }
@@ -72,37 +71,36 @@ section.bg-white .flex div:hover {
     transform: translateY(-5px);
 }
 
-/* Service Providers */
-#providerList .bg-white {
+/* Service Providers and Dashboards */
+.bg-white.p-4.rounded.shadow, .bg-white.p-6.rounded.shadow {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-#providerList .bg-white:hover {
+.bg-white.p-4.rounded.shadow:hover, .bg-white.p-6.rounded.shadow:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-#providerList a {
+.text-blue-600 {
     transition: color 0.3s ease;
 }
 
-#providerList a:hover {
+.text-blue-600:hover {
     color: #1e40af;
 }
 
-/* Client Reviews */
-section.container .grid .bg-white {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Buttons */
+button.bg-blue-600 {
+    transition: background-color 0.3s ease;
 }
 
-section.container .grid .bg-white:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+button.bg-blue-600:hover {
+    background-color: #1e40af;
 }
 
 /* Footer */
 footer {
-    border-top: 2px solid #1e40af;
+    border-top: 3px solid #1e40af;
 }
 
 /* Responsive Design */
@@ -124,20 +122,18 @@ footer {
     }
 
     nav ul li {
-        margin: 10px 0;
+        margin: 8px 0;
     }
 
     .dropdown-menu {
         position: static;
         width: 100%;
         transform: none;
+        border: none;
+        box-shadow: none;
     }
 
-    .slider {
-        height: 200px;
-    }
-
-    #providerList {
+    .grid {
         grid-template-columns: 1fr;
     }
 }
@@ -145,10 +141,36 @@ footer {
 @media (max-width: 640px) {
     section.bg-white .flex {
         flex-direction: column;
-        space-x-0;
+        gap: 1rem;
     }
 
-    section.bg-white .flex div {
-        margin-bottom: 1rem;
+    .container input.w-full {
+        width: 100% !important;
     }
+
+    .dropdown button {
+        width: 100%;
+        text-align: left;
+    }
+}
+
+/* Dashboard Specific */
+.border.p-4.mt-2.rounded {
+    border-color: #e5e7eb;
+    transition: border-color 0.3s ease;
+}
+
+.border.p-4.mt-2.rounded:hover {
+    border-color: #1e40af;
+}
+
+/* Login Form */
+.max-w-md .border {
+    border-color: #e5e7eb;
+    transition: border-color 0.3s ease;
+}
+
+.max-w-md .border:focus {
+    border-color: #1e40af;
+    outline: none;
 }
