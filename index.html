@@ -4,23 +4,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Service 24 - Local Service Providers in Dhaka</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.development.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.development.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/babel-standalone@7.22.9/babel.min.js"></script>
-    <link rel="stylesheet" href="style.css">
     <style>
+        /* Tailwind CSS Base Styles (Subset for Demo) */
+        *, ::before, ::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: sans-serif; background-color: #f3f4f6; }
+        .container { max-width: 1280px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .flex-row { flex-direction: row; }
+        .justify-between { justify-content: space-between; }
+        .justify-center { justify-content: center; }
+        .items-center { align-items: center; }
+        .space-x-4 > * + * { margin-left: 1rem; }
+        .space-y-4 > * + * { margin-top: 1rem; }
+        .space-x-8 > * + * { margin-left: 2rem; }
+        .space-y-2 > * + * { margin-top: 0.5rem; }
+        .grid { display: grid; }
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        .gap-6 { gap: 1.5rem; }
+        .p-4 { padding: 1rem; }
+        .p-6 { padding: 1.5rem; }
+        .py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+        .text-center { text-align: center; }
+        .text-lg { font-size: 1.125rem; }
+        .text-2xl { font-size: 1.5rem; }
+        .font-bold { font-weight: 700; }
+        .bg-white { background-color: #fff; }
+        .bg-blue-600 { background-color: #2563eb; }
+        .bg-blue-700 { background-color: #1e40af; }
+        .text-white { color: #fff; }
+        .text-black { color: #000; }
+        .text-gray-700 { color: #374151; }
+        .text-blue-600 { color: #2563eb; }
+        .hover\:underline:hover { text-decoration: underline; }
+        .hover\:bg-gray-200:hover { background-color: #e5e7eb; }
+        .hover\:bg-blue-700:hover { background-color: #1e40af; }
+        .hover\:text-yellow-300:hover { color: #fde68a; }
+        .rounded { border-radius: 0.25rem; }
+        .shadow { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); }
+        .border { border-width: 1px; }
+        .border-t-2 { border-top-width: 2px; }
+        .border-blue-800 { border-color: #1e3a8a; }
+        .w-full { width: 100%; }
+        .max-w-md { max-width: 28rem; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .mt-2 { margin-top: 0.5rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .absolute { position: absolute; }
+        .relative { position: relative; }
+        .sticky { position: sticky; }
+        .top-0 { top: 0; }
+        .z-10 { z-index: 10; }
+        .z-20 { z-index: 20; }
+        @media (min-width: 768px) {
+            .md\:flex-row { flex-direction: row; }
+            .md\:space-y-0 > * + * { margin-top: 0; }
+            .md\:space-x-4 > * + * { margin-left: 1rem; }
+            .md\:space-x-8 > * + * { margin-left: 2rem; }
+            .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .md\:w-64 { width: 16rem; }
+        }
+        @media (min-width: 1024px) {
+            .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+
+        /* Custom Styles (from previous style.css) */
+        header { box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); }
+        header img { transition: transform 0.3s ease; }
+        header img:hover { transform: scale(1.1); }
+        nav ul li a, nav ul li button { transition: color 0.3s ease; }
+        nav ul li a:hover, nav ul li button:hover { color: #ffd700; }
+        .dropdown-menu { min-width: 200px; z-index: 30; border: 1px solid #e5e7eb; transition: opacity 0.3s ease, transform 0.3s ease; transform: translateY(-10px); opacity: 0; }
+        .dropdown-menu.block { opacity: 1; transform: translateY(0); }
+        .dropdown-menu a { transition: background-color 0.2s ease; }
         .slider { position: relative; width: 100%; height: 400px; overflow: hidden; }
         .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
         .slide.active { opacity: 1; }
+        .slide img { object-fit: cover; width: 100%; height: 100%; }
+        section.bg-white .flex div { transition: transform 0.3s ease; }
+        section.bg-white .flex div:hover { transform: translateY(-5px); }
+        .bg-white.p-4.rounded.shadow, .bg-white.p-6.rounded.shadow { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .bg-white.p-4.rounded.shadow:hover, .bg-white.p-6.rounded.shadow:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); }
+        .text-blue-600 { transition: color 0.3s ease; }
+        .text-blue-600:hover { color: #1e40af; }
+        button.bg-blue-600 { transition: background-color 0.3s ease; }
+        button.bg-blue-600:hover { background-color: #1e40af; }
+        footer { border-top: 3px solid #1e40af; }
+        .border.p-4.mt-2.rounded { border-color: #e5e7eb; transition: border-color 0.3s ease; }
+        .border.p-4.mt-2.rounded:hover { border-color: #1e40af; }
+        .max-w-md .border { border-color: #e5e7eb; transition: border-color 0.3s ease; }
+        .max-w-md .border:focus { border-color: #1e40af; outline: none; }
+        #error { color: red; text-align: center; padding: 20px; }
         @media (max-width: 768px) {
+            header .container { flex-direction: column; align-items: flex-start; }
+            header .flex { flex-direction: column; align-items: flex-start; width: 100%; }
+            nav ul { flex-direction: column; width: 100%; }
+            nav ul li { margin: 8px 0; }
+            .dropdown-menu { position: static; width: 100%; transform: none; border: none; box-shadow: none; }
+            .grid { grid-template-columns: 1fr; }
             .slider { height: 200px; }
             .container { padding: 0 1rem; }
+        }
+        @media (max-width: 640px) {
+            section.bg-white .flex { flex-direction: column; gap: 1rem; }
+            .container input.w-full { width: 100% !important; }
+            .dropdown button { width: 100%; text-align: left; }
         }
     </style>
 </head>
 <body>
     <div id="root"></div>
+    <div id="error">Loading... If this persists, check the console for errors.</div>
     <script type="text/babel">
         const { useState, useEffect } = React;
 
@@ -57,7 +157,10 @@
         ];
 
         // Components
-        const Header = ({ setView, setShowServiceDropdown, setShowAreaDropdown }) => {
+        const Header = ({ setView, setSearchTerm, setSelectedService, setSelectedArea }) => {
+            const [showServiceDropdown, setShowServiceDropdown] = useState(false);
+            const [showAreaDropdown, setShowAreaDropdown] = useState(false);
+
             return (
                 <header className="bg-blue-600 text-white p-4 sticky top-0 z-10 shadow">
                     <div className="container mx-auto flex justify-between items-center flex-col md:flex-row">
@@ -73,7 +176,7 @@
                                 <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6">
                                     <li><a href="#home" className="hover:text-yellow-300" onClick={() => setView("home")}>Home</a></li>
                                     <li className="relative dropdown">
-                                        <button className="hover:text-yellow-300" onClick={() => setShowServiceDropdown(prev => !prev)}>All Services</button>
+                                        <button className="hover:text-yellow-300" onClick={() => setShowServiceDropdown(!showServiceDropdown)}>All Services</button>
                                         <div className={`dropdown-menu absolute bg-white text-black p-4 rounded shadow-lg z-20 ${showServiceDropdown ? "block" : "hidden"}`}>
                                             {services.map(service => (
                                                 <a
@@ -150,7 +253,7 @@
             );
         };
 
-        const ServiceSeekerDashboard = ({ user }) => {
+        const ServiceSeekerDashboard = ({ user, setView }) => {
             const bookings = bookingsData.filter(b => b.seekerId === user.id);
             return (
                 <section className="container mx-auto py-6">
@@ -159,7 +262,7 @@
                         <h3 className="text-lg font-bold">Profile</h3>
                         <p><strong>Name:</strong> {user.name}</p>
                         <p><strong>Email:</strong> {user.email}</p>
-                        <button className="bg-blue-600 text-white p-2 rounded mt-2 hover:bg-blue-700">Browse Services</button>
+                        <button className="bg-blue-600 text-white p-2 rounded mt-2 hover:bg-blue-700" onClick={() => setView("home")}>Browse Services</button>
                         <h3 className="text-lg font-bold mt-4">Booking History</h3>
                         {bookings.map(booking => (
                             <div key={booking.id} className="border p-4 mt-2 rounded">
@@ -266,8 +369,6 @@
             const [searchTerm, setSearchTerm] = useState("");
             const [selectedService, setSelectedService] = useState("");
             const [selectedArea, setSelectedArea] = useState("");
-            const [showServiceDropdown, setShowServiceDropdown] = useState(false);
-            const [showAreaDropdown, setShowAreaDropdown] = useState(false);
             const [user, setUser] = useState(null);
 
             const filteredProviders = serviceData.filter(provider =>
@@ -278,12 +379,17 @@
                 (selectedArea === "" || provider.area === selectedArea)
             );
 
+            useEffect(() => {
+                document.getElementById("error").style.display = "none";
+            }, []);
+
             return (
                 <div className="bg-gray-100 font-sans min-h-screen">
                     <Header
                         setView={setView}
-                        setShowServiceDropdown={setShowServiceDropdown}
-                        setShowAreaDropdown={setShowAreaDropdown}
+                        setSearchTerm={setSearchTerm}
+                        setSelectedService={setSelectedService}
+                        setSelectedArea={setSelectedArea}
                     />
                     {view === "home" && (
                         <>
@@ -311,15 +417,15 @@
                                     <div className="relative dropdown">
                                         <button
                                             className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
-                                            onClick={() => setShowServiceDropdown(!showServiceDropdown)}
+                                            onClick={() => setSelectedService("")}
                                         >
                                             Browse by Services
                                         </button>
-                                        <div className={`dropdown-menu absolute bg-white text-black p-4 rounded shadow-lg z-20 ${showServiceDropdown ? "block" : "hidden"}`}>
+                                        <div className={`dropdown-menu absolute bg-white text-black p-4 rounded shadow-lg z-20 ${selectedService ? "hidden" : "block"}`}>
                                             <a
                                                 href="#all-services"
                                                 className="block hover:bg-gray-200 p-2"
-                                                onClick={() => { setSelectedService(""); setShowServiceDropdown(false); }}
+                                                onClick={() => setSelectedService("")}
                                             >
                                                 All Services
                                             </a>
@@ -328,7 +434,7 @@
                                                     key={service}
                                                     href={`#${service.toLowerCase().replace(" ", "-")}`}
                                                     className="block hover:bg-gray-200 p-2"
-                                                    onClick={() => { setSelectedService(service); setShowServiceDropdown(false); }}
+                                                    onClick={() => setSelectedService(service)}
                                                 >
                                                     {service}
                                                 </a>
@@ -338,15 +444,15 @@
                                     <div className="relative dropdown">
                                         <button
                                             className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
-                                            onClick={() => setShowAreaDropdown(!showAreaDropdown)}
+                                            onClick={() => setSelectedArea("")}
                                         >
                                             Browse by Area
                                         </button>
-                                        <div className={`dropdown-menu absolute bg-white text-black p-4 rounded shadow-lg z-20 ${showAreaDropdown ? "block" : "hidden"}`}>
+                                        <div className={`dropdown-menu absolute bg-white text-black p-4 rounded shadow-lg z-20 ${selectedArea ? "hidden" : "block"}`}>
                                             <a
                                                 href="#all-areas"
                                                 className="block hover:bg-gray-200 p-2"
-                                                onClick={() => { setSelectedArea(""); setShowAreaDropdown(false); }}
+                                                onClick={() => setSelectedArea("")}
                                             >
                                                 All Areas
                                             </a>
@@ -355,7 +461,7 @@
                                                     key={area}
                                                     href={`#${area.toLowerCase()}`}
                                                     className="block hover:bg-gray-200 p-2"
-                                                    onClick={() => { setSelectedArea(area); setShowAreaDropdown(false); }}
+                                                    onClick={() => setSelectedArea(area)}
                                                 >
                                                     {area}
                                                 </a>
@@ -422,7 +528,7 @@
                     )}
                     {view === "login" && <Login setUser={setUser} setView={setView} />}
                     {view === "provider" && <ServiceProviderDashboard user={user} />}
-                    {view === "seeker" && <ServiceSeekerDashboard user={user} />}
+                    {view === "seeker" && <ServiceSeekerDashboard user={user} setView={setView} />}
                     {view === "admin" && <AdminDashboard />}
                     <footer className="bg-blue-600 text-white p-4 border-t-2 border-blue-800">
                         <div className="container mx-auto text-center">
@@ -434,7 +540,12 @@
             );
         };
 
-        ReactDOM.render(<App />, document.getElementById("root"));
+        try {
+            ReactDOM.render(<App />, document.getElementById("root"));
+        } catch (e) {
+            document.getElementById("error").innerText = "Error loading the application. Please check the console for details.";
+            console.error(e);
+        }
     </script>
 </body>
 </html>
