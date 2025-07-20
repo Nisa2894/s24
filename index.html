@@ -5,238 +5,277 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Service 24 - Local Service Providers in Dhaka</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/babel-standalone@7.22.9/babel.min.js"></script>
     <style>
         .slider { position: relative; width: 100%; height: 400px; overflow: hidden; }
         .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
         .slide.active { opacity: 1; }
         .dropdown:hover .dropdown-menu { display: block; }
+        @media (max-width: 768px) {
+            .slider { height: 200px; }
+        }
     </style>
 </head>
-<body class="bg-gray-100 font-sans">
-    <!-- Header -->
-    <header class="bg-blue-600 text-white p-4 sticky top-0 z-10">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center">
-                <img src="https://via.placeholder.com/150x50?text=Service24Logo" alt="Service 24 Logo" class="h-12">
-            </div>
-            <div class="flex items-center space-x-4">
-                <input type="text" id="searchBar" placeholder="Search services..." class="p-2 rounded text-black" onkeyup="searchServices()">
-                <nav>
-                    <ul class="flex space-x-6">
-                        <li><a href="#home" class="hover:underline">Home</a></li>
-                        <li class="relative dropdown">
-                            <a href="#services" class="hover:underline">All Services</a>
-                            <div class="dropdown-menu hidden absolute bg-white text-black p-4 rounded shadow-lg">
-                                <a href="ac-servicing.html" class="block hover:bg-gray-200 p-2">AC Servicing</a>
-                                <a href="plumber.html" class="block hover:bg-gray-200 p-2">Plumber</a>
-                                <a href="electrician.html" class="block hover:bg-gray-200 p-2">Electrician</a>
-                                <a href="home-maid.html" class="block hover:bg-gray-200 p-2">Home Maid</a>
-                                <a href="cleaner.html" class="block hover:bg-gray-200 p-2">Cleaner</a>
-                                <a href="gardener.html" class="block hover:bg-gray-200 p-2">Gardener</a>
-                                <a href="mason.html" class="block hover:bg-gray-200 p-2">Mason</a>
-                                <a href="home-shifting.html" class="block hover:bg-gray-200 p-2">Home Shifting</a>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const serviceData = [
+            { id: 1, name: "Rahim Khan", area: "Dhanmondi", expertise: "AC Servicing", verified: true, phone: "+8801234567890" },
+            { id: 2, name: "Ayesha Begum", area: "Gulshan", expertise: "Home Maid", verified: false, phone: "+8801234567891" },
+            { id: 3, name: "Karim Hossain", area: "Banani", expertise: "Plumber", verified: true, phone: "+8801234567892" },
+            { id: 4, name: "Fatima Akter", area: "Uttara", expertise: "Cleaner", verified: true, phone: "+8801234567893" },
+            { id: 5, name: "Mahmudul Hasan", area: "Mirpur", expertise: "Electrician", verified: false, phone: "+8801234567894" },
+            { id: 6, name: "Shamim Ahmed", area: "Dhanmondi", expertise: "Gardener", verified: true, phone: "+8801234567895" },
+            { id: 7, name: "Rokeya Sultana", area: "Gulshan", expertise: "Mason", verified: false, phone: "+8801234567896" },
+            { id: 8, name: "Abdul Latif", area: "Banani", expertise: "Home Shifting", verified: true, phone: "+8801234567897" }
+        ];
+
+        const services = ["AC Servicing", "Plumber", "Electrician", "Home Maid", "Cleaner", "Gardener", "Mason", "Home Shifting"];
+        const areas = ["Dhanmondi", "Gulshan", "Banani", "Uttara", "Mirpur"];
+        const reviews = [
+            { id: 1, name: "Sadia Islam", service: "AC Servicing", review: "Excellent service, very professional and timely!" },
+            { id: 2, name: "Rashed Khan", service: "Plumber", review: "Fixed my issue quickly, highly recommend!" },
+            { id: 3, name: "Nadia Rahman", service: "Cleaner", review: "Very thorough and polite, great experience!" }
+        ];
+
+        const App = () => {
+            const [currentSlide, setCurrentSlide] = useState(0);
+            const [searchTerm, setSearchTerm] = useState("");
+            const [selectedService, setSelectedService] = useState("");
+            const [selectedArea, setSelectedArea] = useState("");
+            const [showServiceDropdown, setShowServiceDropdown] = useState(false);
+            const [showAreaDropdown, setShowAreaDropdown] = useState(false);
+
+            const slides = [
+                "https://via.placeholder.com/1200x400?text=Service+Banner+1",
+                "https://via.placeholder.com/1200x400?text=Service+Banner+2",
+                "https://via.placeholder.com/1200x400?text=Service+Banner+3"
+            ];
+
+            useEffect(() => {
+                const interval = setInterval(() => {
+                    setCurrentSlide((prev) => (prev + 1) % slides.length);
+                }, 3000);
+                return () => clearInterval(interval);
+            }, []);
+
+            const filteredProviders = serviceData.filter(provider =>
+                (provider.expertise.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                 provider.area.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                 searchTerm === "") &&
+                (selectedService === "" || provider.expertise === selectedService) &&
+                (selectedArea === "" || provider.area === selectedArea)
+            );
+
+            return (
+                <div className="bg-gray-100 font-sans">
+                    {/* Header */}
+                    <header className="bg-blue-600 text-white p-4 sticky top-0 z-10 shadow">
+                        <div className="container mx-auto flex justify-between items-center flex-col md:flex-row">
+                            <img src="https://via.placeholder.com/150x50?text=Service24Logo" alt="Service 24 Logo" className="h-12 mb-4 md:mb-0 hover:scale-110 transition-transform" />
+                            <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
+                                <input
+                                    type="text"
+                                    placeholder="Search services..."
+                                    className="p-2 rounded text-black w-full md:w-64"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
+                                <nav>
+                                    <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6">
+                                        <li><a href="#home" className="hover:text-yellow-300">Home</a></li>
+                                        <li className="relative dropdown">
+                                            <button className="hover:text-yellow-300" onClick={() => setShowServiceDropdown(!showService6596)}>All Services</button>
+                                            {showServiceDropdown && (
+                                                <div className="dropdown-menu absolute bg-white text-black p-4 rounded shadow-lg z-20">
+                                                    {services.map(service => (
+                                                        <a
+                                                            key={service}
+                                                            href={`#${service.toLowerCase().replace(" ", "-")}`}
+                                                            className="block hover:bg-gray-200 p-2"
+                                                            onClick={() => { setSelectedService(service); setShowServiceDropdown(false); }}
+                                                        >
+                                                            {service}
+                                                        </a>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </li>
+                                        <li><a href="#about" className="hover:text-yellow-300">About Us</a></li>
+                                        <li><a href="#contact" className="hover:text-yellow-300">Contact Us</a></li>
+                                    </ul>
+                                </nav>
                             </div>
-                        </li>
-                        <li><a href="about.html" class="hover:underline">About Us</a></li>
-                        <li><a href="contact.html" class="hover:underline">Contact Us</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
+                        </div>
+                    </header>
 
-    <!-- Slider -->
-    <section id="home" class="slider">
-        <div class="slide active">
-            <img src="https://via.placeholder.com/1200x400?text=Service+Banner+1" alt="Banner 1" class="w-full h-full object-cover">
-        </div>
-        <div class="slide">
-            <img src="https://via.placeholder.com/1200x400?text=Service+Banner+2" alt="Banner 2" class="w-full h-full object-cover">
-        </div>
-        <div class="slide">
-            <img src="https://via.placeholder.com/1200x400?text=Service+Banner+3" alt="Banner 3" class="w-full h-full object-cover">
-        </div>
-    </section>
+                    {/* Slider */}
+                    <section id="home" className="slider">
+                        {slides.map((slide, index) => (
+                            <div key={index} className={`slide ${index === currentSlide ? "active" : ""}`}>
+                                <img src={slide} alt={`Banner ${index + 1}`} className="w-full h-full object-cover" />
+                            </div>
+                        ))}
+                    </section>
 
-    <!-- Tagline -->
-    <section class="bg-white py-4">
-        <div class="container mx-auto text-center">
-            <div class="flex justify-center space-x-8">
-                <div>
-                    <h3 class="text-lg font-bold">Completely Free Service Listing</h3>
-                    <p>List your services at no cost!</p>
+                    {/* Tagline */}
+                    <section className="bg-white py-6">
+                        <div className="container mx-auto text-center">
+                            <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8">
+                                <div className="hover:-translate-y-1 transition-transform">
+                                    <h3 className="text-lg font-bold">Completely Free Service Listing</h3>
+                                    <p>List your services at no cost!</p>
+                                </div>
+                                <div className="hover:-translate-y-1 transition-transform">
+                                    <h3 className="text-lg font-bold">No Service Seekers Fee</h3>
+                                    <p>Find services without any charges!</p>
+                                </div>
+                                <div className="hover:-translate-y-1 transition-transform">
+                                    <h3 className="text-lg font-bold">Trustworthy and Verified</h3>
+                                    <p>Only verified providers for your peace of mind!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Filters */}
+                    <section className="container mx-auto py-6 text-center">
+                        <div className="flex justify-center space-x-4">
+                            <div className="relative dropdown">
+                                <button
+                                    className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+                                    onClick={() => setShowServiceDropdown(!showServiceDropdown)}
+                                >
+                                    Browse by Services
+                                </button>
+                                {showServiceDropdown && (
+                                    <div className="dropdown-menu absolute bg-white text-black p-4 rounded shadow-lg z-20">
+                                        <a
+                                            href="#all-services"
+                                            className="block hover:bg-gray-200 p-2"
+                                            onClick={() => { setSelectedService(""); setShowServiceDropdown(false); }}
+                                        >
+                                            All Services
+                                        </a>
+                                        {services.map(service => (
+                                            <a
+                                                key={service}
+                                                href={`#${service.toLowerCase().replace(" ", "-")}`}
+                                                className="block hover:bg-gray-200 p-2"
+                                                onClick={() => { setSelectedService(service); setShowServiceDropdown(false); }}
+                                            >
+                                                {service}
+                                            </a>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                            <div className="relative dropdown">
+                                <button
+                                    className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+                                    onClick={() => setShowAreaDropdown(!showAreaDropdown)}
+                                >
+                                    Browse by Area
+                                </button>
+                                {showAreaDropdown && (
+                                    <div className="dropdown-menu absolute bg-white text-black p-4 rounded shadow-lg z-20">
+                                        <a
+                                            href="#all-areas"
+                                            className="block hover:bg-gray-200 p-2"
+                                            onClick={() => { setSelectedArea(""); setShowAreaDropdown(false); }}
+                                        >
+                                            All Areas
+                                        </a>
+                                        {areas.map(area => (
+                                            <a
+                                                key={area}
+                                                href={`#${area.toLowerCase()}`}
+                                                className="block hover:bg-gray-200 p-2"
+                                                onClick={() => { setSelectedArea(area); setShowAreaDropdown(false); }}
+                                            >
+                                                {area}
+                                            </a>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    section>
+
+                    {/* Service Providers */}
+                    <section id="providers" className="container mx-auto py-6">
+                        <h2 className="text-2xl font-bold text-center mb-6">Our Service Providers</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {filteredProviders.map(provider => (
+                                <div key={provider.id} className="bg-white p-4 rounded shadow hover:-translate-y-1 hover:shadow-lg transition-all">
+                                    <h3 className="text-lg font-bold">{provider.name}</h3>
+                                    <p><strong>Area:</strong> {provider.area}</p>
+                                    <p><strong>Expertise:</strong> {provider.expertise}</p>
+                                    <p><strong>Status:</strong> {provider.verified ? "Verified" : "Not Verified"}</p>
+                                    <a href={`tel:${provider.phone}`}250 className="text-blue-600 hover:underline">Call</a> | 
+                                    <a href={`https://wa.me/${provider.phone}`} className="text-blue-600 hover:underline">WhatsApp</a>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Client Reviews */}
+                    <section className="container mx-auto py-6">
+                        <h2 className="text-2xl font-bold text-center mb-6">Client Reviews</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {reviews.map(review => (
+                                <div key={review.id} className="bg-white p-4 rounded shadow hover:-translate-y-1 hover:shadow-lg transition-all">
+                                    <h3 className="text-lg font-bold">{review.name}</h3>
+                                    <p><strong>Service:</strong> {review.service}</p>
+                                    <p>{review.review}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* About Us */}
+                    <section id="about" className="container mx-auto py-6">
+                        <h2 className="text-2xl font-bold text-center mb-6">About Us</h2>
+                        <div className="bg-white p-6 rounded shadow">
+                            <p>
+                                Service 24 is your trusted platform for connecting with local service providers in Dhaka. 
+                                We aim to provide a seamless experience for finding reliable professionals for all your needs. 
+                                Our mission is to ensure quality, affordability, and trust in every service.
+                            </p>
+                            <p>
+                                Our team is dedicated to verifying providers to maintain high standards. 
+                                Edit this section to add your unique story and vision.
+                            </p>
+                        </div>
+                    </section>
+
+                    {/* Contact Us */}
+                    <section id="contact" className="container mx-auto py-6">
+                        <h2 className="text-2xl font-bold text-center mb-6">Contact Us</h2>
+                        <div className="bg-white p-6 rounded shadow">
+                            <p><strong>Address:</strong> 123 Service Lane, Dhaka, Bangladesh</p>
+                            <p><strong>Phone:</strong> <a href="tel:+8801234567890" className="text-blue-600 hover:underline">+8801234567890</a></p>
+                            <p><strong>Email:</strong> <a href="mailto:info@service24.com" className="text-blue-600 hover:underline">info@service24.com</a></p>
+                            <p>Reach out to us for any inquiries or support. Edit this section to update contact details.</p>
+                        </div>
+                    </section>
+
+                    {/* Footer */}
+                    <footer className="bg-blue-600 text-white p-4 border-t-2 border-blue-800">
+                        <div className="container mx-auto text-center">
+                            <p><strong>Contact:</strong> Service 24, Dhaka, Bangladesh | Phone: <a href="tel:+8801234567890" className="hover:text-yellow-300">+8801234567890</a> | Email: <a href="mailto:info@service24.com" className="hover:text-yellow-300">info@service24.com</a></p>
+                            <p>© 2025 Service 24. All rights reserved.</p>
+                        </div>
+                    </footer>
                 </div>
-                <div>
-                    <h3 class="text-lg font-bold">No Service Seekers Fee</h3>
-                    <p>Find services without any charges!</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold">Trustworthy and Verified</h3>
-                    <p>Only verified providers for your peace of mind!</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            );
+        };
 
-    <!-- Service and Area Filters -->
-    <section class="container mx-auto py-6 text-center">
-        <div class="flex justify-center space-x-4">
-            <div class="relative dropdown">
-                <button class="bg-blue-600 text-white p-2 rounded">Browse by Services</button>
-                <div class="dropdown-menu hidden absolute bg-white text-black p-4 rounded shadow-lg z-10">
-                    <a href="ac-servicing.html" class="block hover:bg-gray-200 p-2">AC Servicing</a>
-                    <a href="plumber.html" class="block hover:bg-gray-200 p-2">Plumber</a>
-                    <a href="electrician.html" class="block hover:bg-gray-200 p-2">Electrician</a>
-                    <a href="home-maid.html" class="block hover:bg-gray-200 p-2">Home Maid</a>
-                    <a href="cleaner.html" class="block hover:bg-gray-200 p-2">Cleaner</a>
-                    <a href="gardener.html" class="block hover:bg-gray-200 p-2">Gardener</a>
-                    <a href="mason.html" class="block hover:bg-gray-200 p-2">Mason</a>
-                    <a href="home-shifting.html" class="block hover:bg-gray-200 p-2">Home Shifting</a>
-                </div>
-            </div>
-            <div class="relative dropdown">
-                <button class="bg-blue-600 text-white p-2 rounded">Browse by Area</button>
-                <div class="dropdown-menu hidden absolute bg-white text-black p-4 rounded shadow-lg z-10">
-                    <a href="#dhaka" class="block hover:bg-gray-200 p-2">Dhanmondi</a>
-                    <a href="#dhaka" class="block hover:bg-gray-200 p-2">Gulshan</a>
-                    <a href="#dhaka" class="block hover:bg-gray-200 p-2">Banani</a>
-                    <a href="#dhaka" class="block hover:bg-gray-200 p-2">Uttara</a>
-                    <a href="#dhaka" class="block hover:bg-gray-200 p-2">Mirpur</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Service Providers -->
-    <section id="providers" class="container mx-auto py-6">
-        <h2 class="text-2xl font-bold text-center mb-6">Our Service Providers</h2>
-        <div id="providerList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Sample Data -->
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="text-lg font-bold">Rahim Khan</h3>
-                <p><strong>Area:</strong> Dhanmondi</p>
-                <p><strong>Expertise:</strong> AC Servicing</p>
-                <p><strong>Status:</strong> Verified</p>
-                <a href="tel:+8801234567890" class="text-blue-600 hover:underline">Call</a> | 
-                <a href="https://wa.me/+8801234567890" class="text-blue-600 hover:underline">WhatsApp</a>
-            </div>
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="text-lg font-bold">Ayesha Begum</h3>
-                <p><strong>Area:</strong> Gulshan</p>
-                <p><strong>Expertise:</strong> Home Maid</p>
-                <p><strong>Status:</strong> Not Verified</p>
-                <a href="tel:+8801234567891" class="text-blue-600 hover:underline">Call</a> | 
-                <a href="https://wa.me/+8801234567891" class="text-blue-600 hover:underline">WhatsApp</a>
-            </div>
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="text-lg font-bold">Karim Hossain</h3>
-                <p><strong>Area:</strong> Banani</p>
-                <p><strong>Expertise:</strong> Plumber</p>
-                <p><strong>Status:</strong> Verified</p>
-                <a href="tel:+8801234567892" class="text-blue-600 hover:underline">Call</a> | 
-                <a href="https://wa.me/+8801234567892" class="text-blue-600 hover:underline">WhatsApp</a>
-            </div>
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="text-lg font-bold">Fatima Akter</h3>
-                <p><strong>Area:</strong> Uttara</p>
-                <p><strong>Expertise:</strong> Cleaner</p>
-                <p><strong>Status:</strong> Verified</p>
-                <a href="tel:+8801234567893" class="text-blue-600 hover:underline">Call</a> | 
-                <a href="https://wa.me/+8801234567893" class="text-blue-600 hover:underline">WhatsApp</a>
-            </div>
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="text-lg font-bold">Mahmudul Hasan</h3>
-                <p><strong>Area:</strong> Mirpur</p>
-                <p><strong>Expertise:</strong> Electrician</p>
-                <p><strong>Status:</strong> Not Verified</p>
-                <a href="tel:+8801234567894" class="text-blue-600 hover:underline">Call</a> | 
-                <a href="https://wa.me/+8801234567894" class="text-blue-600 hover:underline">WhatsApp</a>
-            </div>
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="text-lg font-bold">Shamim Ahmed</h3>
-                <p><strong>Area:</strong> Dhanmondi</p>
-                <p><strong>Expertise:</strong> Gardener</p>
-                <p><strong>Status:</strong> Verified</p>
-                <a href="tel:+8801234567895" class="text-blue-600 hover:underline">Call</a> | 
-                <a href="https://wa.me/+8801234567895" class="text-blue-600 hover:underline">WhatsApp</a>
-            </div>
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="text-lg font-bold">Rokeya Sultana</h3>
-                <p><strong>Area:</strong> Gulshan</p>
-                <p><strong>Expertise:</strong> Mason</p>
-                <p><strong>Status:</strong> Not Verified</p>
-                <a href="tel:+8801234567896" class="text-blue-600 hover:underline">Call</a> | 
-                <a href="https://wa.me/+8801234567896" class="text-blue-600 hover:underline">WhatsApp</a>
-            </div>
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="text-lg font-bold">Abdul Latif</h3>
-                <p><strong>Area:</strong> Banani</p>
-                <p><strong>Expertise:</strong> Home Shifting</p>
-                <p><strong>Status:</strong> Verified</p>
-                <a href="tel:+8801234567897" class="text-blue-600 hover:underline">Call</a> | 
-                <a href="https://wa.me/+8801234567897" class="text-blue-600 hover:underline">WhatsApp</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Client Reviews -->
-    <section class="container mx-auto py-6">
-        <h2 class="text-2xl font-bold text-center mb-6">Client Reviews</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="bg-white p-4 rounded shadowTommy>
-                <h3 class="text-lg font-bold">Sadia Islam</h3>
-                <p><strong>Service:</strong> AC Servicing</p>
-                <p>"Excellent service, very professional and timely!"</p>
-            </div>
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="text-lg font-bold">Rashed Khan</h3>
-                <p><strong>Service:</strong> Plumber</p>
-                <p>"Fixed my issue quickly, highly recommend!"</p>
-            </div>
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="text-lg font-bold">Nadia Rahman</h3>
-                <p><strong>Service:</strong> Cleaner</p>
-                <p>"Very thorough and polite, great experience!"</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-blue-600 text-white p-4">
-        <div class="container mx-auto text-center">
-            <p><strong>Contact:</strong> Service 24, Dhaka, Bangladesh | Phone: +8801234567890 | Email: info@service24.com</p>
-            <p>&copy; 2025 Service 24. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Slider Functionality
-        const slides = document.querySelectorAll('.slide');
-        let currentSlide = 0;
-
-        function showNextSlide() {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }
-
-        setInterval(showNextSlide, 3000);
-
-        // Search Functionality
-        function searchServices() {
-            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
-            const providers = document.getElementById('providerList').children;
-            for (let provider of providers) {
-                const expertise = provider.querySelector('p:nth-child(2)').textContent.toLowerCase();
-                const area = provider.querySelector('p:nth-child(1)').textContent.toLowerCase();
-                if (expertise.includes(searchTerm) || area.includes(searchTerm) || searchTerm === '') {
-                    provider.style.display = 'block';
-                } else {
-                    provider.style.display = 'none';
-                }
-            }
-        }
+        ReactDOM.render(<App />, document.getElementById("root"));
     </script>
 </body>
 </html>
