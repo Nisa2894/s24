@@ -18,8 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Service Filter
     const serviceCategory = document.getElementById('service-category');
     const area = document.getElementById('area');
+    const filterBtn = document.getElementById('filter-btn');
     const providers = document.getElementById('providers');
-    const serviceLinks = document.querySelectorAll('nav ul li ul a[data-service]');
+    const serviceLinks = document.querySelectorAll('.dropdown-item[data-service]');
 
     function filterProviders() {
         const selectedService = serviceCategory.value;
@@ -39,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Handle filter button click
+    filterBtn.addEventListener('click', filterProviders);
+
     // Handle dropdown menu filtering
     serviceLinks.forEach(link => {
         link.addEventListener('click', (e) => {
@@ -48,7 +52,4 @@ document.addEventListener('DOMContentLoaded', () => {
             filterProviders();
         });
     });
-
-    serviceCategory.addEventListener('change', filterProviders);
-    area.addEventListener('change', filterProviders);
 });
