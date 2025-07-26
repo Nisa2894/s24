@@ -5,7 +5,7 @@ body {
 }
 
 header nav div div {
-    min-width: 600px;
+    min-width: 200px;
 }
 
 .slider img {
@@ -19,31 +19,13 @@ header nav div div {
 @media (max-width: 768px) {
     header nav {
         flex-direction: column;
-        align-items: center;
-        width: 100%;
-        padding: 10px 0;
+        align-items: flex-start;
     }
     header nav a, header nav button {
-        margin: 8px 0;
-        width: 100%;
-        text-align: center;
+        margin: 5px 0;
     }
     header nav div div {
-        position: dynamic;
+        position: static;
         width: 100%;
-        background-color: #15803d; /* Darker green for dropdown */
-    }
-    header nav div div a {
-        display: block;
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-    }
-    header .max-w-6xl {
-        flex-direction: column;
-        align-items: center;
-    }
-    header .text-2xl {
-        margin-bottom: 10px;
     }
 }
