@@ -3,95 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join as Service Provider - Service 24</title>
-    <link rel="stylesheet" href="/styles.css">
+    <title>Join as Service Provider - Home Service Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-100">
     <!-- Header -->
-    <header class="bg-green-600 text-white py-4">
-        <div class="container mx-auto flex justify-between items-center px-4">
-            <div>
-                <img src="/logo-placeholder.png" alt="Service 24 Logo" class="h-16">
+    <header class="bg-green-600 text-white fixed w-full top-0 z-50 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold">
+                <img src="logo.png" alt="Logo" class="h-10">
             </div>
-            <nav>
-                <ul class="flex space-x-6">
-                    <li><a href="/index.html" class="hover:text-gray-200">Home</a></li>
-                    <li class="relative group">
-                        <a href="#" class="hover:text-gray-200">Services</a>
-                        <ul class="dropdown">
-                            <li><a href="#" class="dropdown-item" data-service="Plumber">Plumber</a></li>
-                            <li><a href="#" class="dropdown-item" data-service="Electrician">Electrician</a></li>
-                            <li><a href="#" class="dropdown-item" data-service="AC Mechanic">AC Mechanic</a></li>
-                            <li><a href="#" class="dropdown-item" data-service="Home Maid">Home Maid</a></li>
-                            <li><a href="#" class="dropdown-item" data-service="Cleaner">Cleaner</a></li>
-                            <li><a href="#" class="dropdown-item" data-service="Mason">Mason</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/about.html" class="hover:text-gray-200">About Us</a></li>
-                    <li><a href="/contact.html" class="hover:text-gray-200">Contact Us</a></li>
-                    <li class="relative group">
-                        <a href="#" class="hover:text-gray-200">Join Us</a>
-                        <ul class="dropdown">
-                            <li><a href="/join-seeker.html" class="dropdown-item">Join as Seeker</a></li>
-                            <li><a href="/join-provider.html" class="dropdown-item">Join as Provider</a></li>
-                        </ul>
-                    </li>
-                </ul>
+            <nav class="space-x-4">
+                <a href="index.html" class="hover:text-green-200">Home</a>
+                <div class="relative group">
+                    <button class="hover:text-green-200">Services</button>
+                    <div class="absolute hidden group-hover:block bg-green-600 text-white rounded shadow-lg">
+                        <a href="#" class="block px-4 py-2 hover:bg-green-700">Plumber</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-green-700">Electrician</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-green-700">AC Mechanic</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-green-700">Home Services</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-green-700">Cleaner</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-green-700">Mason</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-green-700">Furniture Repair</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-green-700">Internet Service Provider</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-green-700">Dish Services</a>
+                    </div>
+                </div>
+                <a href="about.html" class="hover:text-green-200">About Us</a>
+                <a href="contact.html" class="hover:text-green-200">Contact Us</a>
+                <div class="relative group">
+                    <button class="hover:text-green-200">Join Us</button>
+                    <div class="absolute hidden group-hover:block bg-green-600 text-white rounded shadow-lg">
+                        <a href="join-seeker.html" class="block px-4 py-2 hover:bg-green-700">Join as Service Seeker</a>
+                        <a href="join-provider.html" class="block px-4 py-2 hover:bg-green-700">Join as Service Provider</a>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
 
-    <!-- Provider Form -->
-    <section class="container mx-auto my-8 px-4">
-        <h2 class="text-3xl font-bold mb-6 text-center">Join Service 24 as a Service Provider</h2>
-        <form id="provider-form" enctype="multipart/form-data" class="max-w-lg mx-auto bg-white p-6 rounded shadow-lg">
-            <div class="mb-4">
-                <label for="name" class="block text-sm font-medium mb-2">Name</label>
-                <input type="text" id="name" name="name" class="w-full p-2 border rounded" required>
+    <!-- Service Provider Form -->
+    <section class="pt-20 py-10">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-green-600 mb-6">Join as a Service Provider</h2>
+            <div class="bg-white p-6 rounded shadow">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium">Name</label>
+                        <input type="text" class="w-full p-2 border rounded" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Address</label>
+                        <input type="text" class="w-full p-2 border rounded" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Phone Number</label>
+                        <input type="tel" class="w-full p-2 border rounded" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Photo</label>
+                        <input type="file" class="w-full p-2 border rounded" accept=".jpg,.png" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Shop/Office Address (Optional)</label>
+                        <input type="text" class="w-full p-2 border rounded">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">NID/Passport</label>
+                        <input type="file" class="w-full p-2 border rounded" accept=".pdf,.jpg,.png" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Area of Expertise</label>
+                        <select class="w-full p-2 border rounded" required>
+                            <option value="Plumber">Plumber</option>
+                            <option value="Electrician">Electrician</option>
+                            <option value="AC Mechanic">AC Mechanic</option>
+                            <option value="Home Services">Home Services</option>
+                            <option value="Cleaner">Cleaner</option>
+                            <option value="Mason">Mason</option>
+                            <option value="Furniture Repair">Furniture Repair</option>
+                            <option value="Internet Service Provider">Internet Service Provider</option>
+                            <option value="Dish Services">Dish Services</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Experiences</label>
+                        <textarea class="w-full p-2 border rounded" rows="4" required></textarea>
+                    </div>
+                    <button class="bg-green-600 text-white px-4 py-2 rounded">Submit</button>
+                </div>
             </div>
-            <div class="mb-4">
-                <label for="photo" class="block text-sm font-medium mb-2">Upload Photo</label>
-                <input type="file" id="photo" name="photo" class="w-full p-2 border rounded" accept=".jpg,.png" required>
-            </div>
-            <div class="mb-4">
-                <label for="address" class="block text-sm font-medium mb-2">Address</label>
-                <textarea id="address" name="address" class="w-full p-2 border rounded" required></textarea>
-            </div>
-            <div class="mb-4">
-                <label for="nid" class="block text-sm font-medium mb-2">NID/Passport Number</label>
-                <input type="text" id="nid" name="nid" class="w-full p-2 border rounded" required>
-            </div>
-            <div class="mb-4">
-                <label for="expertise" class="block text-sm font-medium mb-2">Expertise</label>
-                <select id="expertise" name="expertise" class="w-full p-2 border rounded" required>
-                    <option value="">Select Expertise</option>
-                    <option value="Plumber">Plumber</option>
-                    <option value="Electrician">Electrician</option>
-                    <option value="AC Mechanic">AC Mechanic</option>
-                    <option value="Home Maid">Home Maid</option>
-                    <option value="Cleaner">Cleaner</option>
-                    <option value="Mason">Mason</option>
-                </select>
-            </div>
-            <div class="mb-4">
-                <label for="experience" class="block text-sm font-medium mb-2">Years of Experience</label>
-                <input type="number" id="experience" name="experience" class="w-full p-2 border rounded" required>
-            </div>
-            <div class="mb-4">
-                <label for="document" class="block text-sm font-medium mb-2">Upload Document (NID/Passport)</label>
-                <input type="file" id="document" name="document" class="w-full p-2 border rounded" accept=".pdf,.jpg,.png" required>
-            </div>
-            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Submit Application</button>
-        </form>
+        </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-green-600 text-white py-6">
-        <div class="container mx-auto px-4 text-center">
-            <p>© 2025 Service 24 - Local Services in Dhaka. All rights reserved.</p>
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p>Home Service Hub</p>
+            <p>123 Green Street, Dhaka, Bangladesh</p>
+            <p>&copy; 2025 Home Service Hub. All rights reserved.</p>
         </div>
     </footer>
-
-    <script src="/join-provider.js"></script>
 </body>
 </html>
