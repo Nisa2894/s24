@@ -4,8 +4,19 @@ body {
     padding: 0;
 }
 
-header nav div div {
+header {
+    z-index: 50;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+}
+
+header nav div div.dropdown {
     min-width: 200px;
+    top: 100%;
+    left: 0;
 }
 
 .slider img {
@@ -18,32 +29,54 @@ header nav div div {
 
 @media (max-width: 768px) {
     header nav {
+        display: none;
         flex-direction: column;
         align-items: center;
         width: 100%;
+        background-color: #15803d; /* Darker green for mobile menu */
         padding: 10px 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+    }
+    header nav.active {
+        display: flex;
     }
     header nav a, header nav button {
         margin: 8px 0;
         width: 100%;
         text-align: center;
+        padding: 10px;
     }
-    header nav div div {
-        position: dynamic;
+    header nav div div.dropdown {
+        position: static;
         width: 100%;
-        background-color: #15803d; /* Darker green for dropdown */
+        background-color: #1e9b4f; /* Slightly lighter green for dropdown */
     }
-    header nav div div a {
+    header nav div div.dropdown a {
         display: block;
         width: 100%;
         text-align: center;
         padding: 10px;
     }
     header .max-w-6xl {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
+        justify-content: space-between;
     }
     header .text-2xl {
-        margin-bottom: 10px;
+        margin: 0;
+    }
+    #menu-toggle {
+        display: block;
+    }
+}
+
+@media (min-width: 769px) {
+    #menu-toggle {
+        display: none;
+    }
+    header nav {
+        display: flex !important;
     }
 }
