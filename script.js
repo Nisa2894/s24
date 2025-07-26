@@ -1,12 +1,12 @@
 const providersData = [
-    { name: "John Doe", service: "Plumber", verified: true, photo: "provider1.jpg", phone: "+880123456789" },
-    { name: "Jane Smith", service: "Electrician", verified: true, photo: "provider2.jpg", phone: "+880987654321" },
-    { name: "Mike Brown", service: "AC Mechanic", verified: false, photo: "provider3.jpg", phone: "+880111222333" },
-    { name: "Sarah Wilson", service: "Cleaner", verified: true, photo: "provider4.jpg", phone: "+880444555666" },
-    { name: "Tom Clark", service: "Mason", verified: false, photo: "provider5.jpg", phone: "+880777888999" },
-    { name: "Lisa Davis", service: "Furniture Repair", verified: true, photo: "provider6.jpg", phone: "+880222333444" },
-    { name: "Peter Evans", service: "Internet Service Provider", verified: true, photo: "provider7.jpg", phone: "+880555666777" },
-    { name: "Emma White", service: "Dish Services", verified: false, photo: "provider8.jpg", phone: "+880888999000" }
+    { name: "Rahim Miah", service: "Plumber", verified: true, photo: "provider1.jpg", phone: "+880123456789" },
+    { name: "Motaleb Talukder", service: "Electrician", verified: true, photo: "provider2.jpg", phone: "+880987654321" },
+    { name: "Razzak Mia", service: "AC Mechanic", verified: false, photo: "provider3.jpg", phone: "+880111222333" },
+    { name: "Johora Begum", service: "Cleaner", verified: true, photo: "provider4.jpg", phone: "+880444555666" },
+    { name: "Rafiq Ali", service: "Mason", verified: false, photo: "provider5.jpg", phone: "+880777888999" },
+    { name: "Mamunur Rahman", service: "Furniture Repair", verified: true, photo: "provider6.jpg", phone: "+880222333444" },
+    { name: "Md. Shah Khandaker", service: "Internet Service Provider", verified: true, photo: "provider7.jpg", phone: "+880555666777" },
+    { name: "Poli Akter", service: "Dish Services", verified: false, photo: "provider8.jpg", phone: "+880888999000" }
 ];
 
 function displayProviders(service = '', area = '') {
