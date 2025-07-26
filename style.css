@@ -1,82 +1,31 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-.container {
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+header nav div div {
+    min-width: 200px;
 }
 
-header nav ul {
-    @apply flex space-x-6;
+.slider img {
+    display: none;
 }
 
-header nav ul li {
-    @apply relative;
-}
-
-header nav ul li a {
-    @apply transition-colors duration-300 text-white hover:text-gray-200;
-}
-
-header nav ul li .dropdown {
-    @apply absolute hidden bg-green-600 text-white rounded shadow-lg mt-2 min-w-[150px] z-50;
-    top: 100%;
-    left: 0;
-}
-
-header nav ul li:hover .dropdown {
-    @apply block;
-}
-
-header nav ul li .dropdown li .dropdown-item {
-    @apply block px-4 py-2 text-white hover:bg-green-700;
-}
-
-.swiper-container {
-    width: 100%;
-    height: 400px;
-}
-
-.swiper-slide img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+.slider img.active {
+    display: block;
 }
 
 @media (max-width: 768px) {
-    header nav ul {
-        @apply flex-col items-center;
+    header nav {
+        flex-direction: column;
+        align-items: flex-start;
     }
-
-    header nav ul li {
-        @apply mb-2;
+    header nav a, header nav button {
+        margin: 5px 0;
     }
-
-    header nav ul li .dropdown {
-        @apply relative w-full mt-0;
-    }
-
-    header nav ul li:hover .dropdown {
-        @apply block;
-    }
-
-    .swiper-container {
-        height: 300px;
-    }
-
-    .flex-col.md\:flex-row {
-        @apply flex-col;
-    }
-
-    .md\:space-x-4 {
-        @apply space-x-0 space-y-4;
+    header nav div div {
+        position: static;
+        width: 100%;
     }
 }
