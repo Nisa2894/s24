@@ -64,6 +64,12 @@ setInterval(() => {
     showSlide(currentSlide);
 }, 5000);
 
+// Hamburger menu toggle
+document.getElementById('menu-toggle').addEventListener('click', () => {
+    const menu = document.getElementById('main-menu');
+    menu.classList.toggle('active');
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     showSlide(currentSlide);
     displayProviders();
