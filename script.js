@@ -1,5 +1,5 @@
 const providersData = [
-    { name: "Rahim Miah", service: "Plumber", verified: true, photo: "provider1.jpg", phone: "+880123456789" },
+    { name: "Rahim Miah", service: "Plumber", verified: true, Area: "Gulshan", photo: "provider1.jpg", phone: "+880123456789" },
     { name: "Motaleb Talukder", service: "Electrician", verified: true, photo: "provider2.jpg", phone: "+880987654321" },
     { name: "Razzak Mia", service: "AC Mechanic", verified: false, photo: "provider3.jpg", phone: "+880111222333" },
     { name: "Johora Begum", service: "Cleaner", verified: true, photo: "provider4.jpg", phone: "+880444555666" },
